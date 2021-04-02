@@ -22,6 +22,7 @@
           :class="{ input_error: getError }"
           placeholder="Login"
           v-model="nickname"
+          :disabled="loading"
         />
         <label for="auth-password">Enter your password</label>
         <input
@@ -31,13 +32,14 @@
           :class="{ input_error: getError }"
           placeholder="Password"
           v-model="password"
+          :disabled="loading"
         />
       </div>
       <div class="auth-middle">
-        <button type="submit" v-if="!login">
+        <button type="submit" :disabled="loading" v-if="!login">
           Sign Up
         </button>
-        <button type="submit" v-else>Log In</button>
+        <button type="submit" :disabled="loading" v-else>Log In</button>
       </div>
       <div class="auth-bottom">
         <span v-if="!login">
@@ -83,7 +85,6 @@ export default {
     },
     onSubmit() {
       this.setLoader();
-      console.log(this.password);
       this.setTokenAndUser({
         field: this.setField,
         nickname: this.nickname,
@@ -232,6 +233,15 @@ input {
 
 .auth-middle button:focus {
   outline: none;
+}
+
+.auth-middle button:disabled {
+  color: #ccc;
+  border-color: #ccc;
+}
+
+.auth-middle button:disabled:hover {
+  background: #fff;
 }
 
 .auth-bottom {
