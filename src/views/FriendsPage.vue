@@ -1,10 +1,13 @@
 <template>
-  <div>Friends Page</div>
+  <div>
+    Friends
+  </div>
 </template>
 
 <script>
 export default {
-  name: "FriendsPage"
+  name: "FriendsPage",
+  computed: {}
 };
 </script>
 

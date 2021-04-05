@@ -8,17 +8,16 @@ import PublicationPage from '@/views/PublicationPage'
 
 Vue.use(VueRouter);
 
+const USER_URL = '/user/id=:id'
+
 export default new VueRouter({
     base: '/',
     mode: 'history',
     routes: [
         { path: '/', component: AuthPage, name: AuthPage.name },
-        {
-            path: '/user/id=:id', component: UserPage, name: UserPage.name, children: [
-                { path: 'friends/', component: FriendsPage, name: FriendsPage.name },
-                { path: 'publication/:publicationId', component: PublicationPage, name: PublicationPage.name },
+        { path: USER_URL, component: UserPage, name: UserPage.name },
+        { path: USER_URL.concat('/friends/'), component: FriendsPage, name: FriendsPage.name },
+        { path: USER_URL.concat('/publication/:publicationId'), component: PublicationPage, name: PublicationPage.name },
 
-            ]
-        },
     ]
 });

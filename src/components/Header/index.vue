@@ -2,9 +2,12 @@
   <header class="header">
     <div class="header-body">
       <h2>Social Network</h2>
-      <div class="header-body-search">
-        <input type="text" placeholder="Search user..." v-model="nickname" />
-        <button class="search-btn" @click="searchUserByName">Search</button>
+      <div class="header-body-main">
+        <div class="header-body-search">
+          <input type="text" placeholder="Search user..." v-model="nickname" />
+          <button class="search-btn" @click="searchUserByName">Search</button>
+        </div>
+        <font-awesome-icon icon="user-circle" class="user-icon" />
       </div>
     </div>
   </header>
@@ -50,6 +53,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.user-icon {
+  cursor: pointer;
+  margin: 0 10px 0 40px;
+  font-size: 30px;
+}
+
 .header {
   background: #cfcfcf;
   width: 80%;
@@ -109,5 +118,9 @@ input:focus {
   background: rgb(219, 99, 0);
   color: #fff;
   transition: 0.5s;
+}
+
+.header-body-main {
+  display: flex;
 }
 </style>

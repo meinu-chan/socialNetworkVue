@@ -195,7 +195,9 @@ input {
   width: 300px;
   height: 300px;
   border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   border-radius: 20px;
+  background: #fff;
 }
 
 .auth-click-here {
