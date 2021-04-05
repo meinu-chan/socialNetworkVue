@@ -94,7 +94,11 @@ export default {
         if (!this.getError) {
           this.password = "";
           this.nickname = "";
-          this.$router.push(`/user/id=${this.getUser.userId}`);
+          sessionStorage.setItem("token", this.getToken);
+          this.$router.push({
+            name: "UserPage",
+            params: { id: this.getUser.userId }
+          });
         }
       });
     },
@@ -119,7 +123,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getUser", "getError"]),
+    ...mapGetters(["getUser", "getError", "getToken"]),
     setField() {
       return this.login ? "login" : "register";
     }
@@ -142,9 +146,11 @@ export default {
   color: rgb(206, 54, 54);
   margin-bottom: -3px;
 }
+
 .auth-login-error {
   color: rgb(255, 61, 61);
 }
+
 .auth-password-error {
   color: rgb(255, 61, 61);
 }

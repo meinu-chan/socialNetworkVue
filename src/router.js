@@ -12,9 +12,13 @@ export default new VueRouter({
     base: '/',
     mode: 'history',
     routes: [
-        { path: '/', component: AuthPage },
-        { path: '/user/id=:id', component: UserPage },
-        { path: '/friends/id=:id', component: FriendsPage },
-        { path: '/publication/id=:id', component: PublicationPage },
+        { path: '/', component: AuthPage, name: AuthPage.name },
+        {
+            path: '/user/id=:id', component: UserPage, name: UserPage.name, children: [
+                { path: 'friends/', component: FriendsPage, name: FriendsPage.name },
+                { path: 'publication/:publicationId', component: PublicationPage, name: PublicationPage.name },
+
+            ]
+        },
     ]
 });
