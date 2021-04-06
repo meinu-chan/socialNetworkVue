@@ -44,6 +44,7 @@ export default {
                         const {
                             data: { token, friends, nickname, publications, requests, userId, waitingForResponse }
                         } = res;
+                        sessionStorage.setItem("userId", userId);
                         commit("updateTokenAndUser", { token, user: { friends, nickname, publications, requests, userId, waitingForResponse } })
                     }).catch(err => {
                         if (err.response) {
@@ -65,6 +66,24 @@ export default {
                     commit('updateUser', { ...res.data.user })
                 }
                 ).catch(error => commit("setError", error))
+        },
+        async searchUserByName({ commit }, { name, token }) {
+            console.log(name, token)
+            await axios
+                .get(
+                    "https://pure-hollows-15090.herokuapp.com/api/".concat(
+                        `page/find/nickname=${name}`
+                    ), {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+
+                ).then(res => {
+                    console.log(res);
+                    commit("updateUser", res.data.user)
+                })
+                .catch(error => commit("setError", error))
         },
         setCustomError({ commit }, errorMsg) {
             commit("setError", errorMsg)

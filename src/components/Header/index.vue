@@ -5,7 +5,7 @@
       <div class="header-body-main">
         <div class="header-body-search">
           <input type="text" placeholder="Search user..." v-model="nickname" />
-          <button class="search-btn" @click="searchUserByName">Search</button>
+          <button class="search-btn" @click="searchUser">Search</button>
         </div>
         <font-awesome-icon icon="user-circle" class="user-icon" />
       </div>
@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Header",
@@ -25,29 +24,21 @@ export default {
     };
   },
   methods: {
-    async searchUserByName() {
-      await axios
-        .get(
-          "https://pure-hollows-15090.herokuapp.com/api/".concat(
-            `page/find/nickname=${this.nickname}`
-          ),
-          {
-            headers: {
-              Authorization: this.getToken
-            }
-          }
-        )
-        .then(res => {
-          console.log(res);
-          this.$router.push({
-            name: "UserPage",
-            params: { id: res.data.user._id }
-          });
-        });
+    ...mapActions(["searchUserByName"]),
+    searchUser() {
+      this.searchUserByName({
+        name: this.nickname,
+        token: sessionStorage.getItem("token")
+      }).then(() =>
+        this.$router.push({
+          name: "UserPage",
+          params: { id: this.getUser._id }
+        })
+      );
     }
   },
   computed: {
-    ...mapGetters(["getToken"])
+    ...mapGetters(["getToken", "getUser"])
   }
 };
 </script>

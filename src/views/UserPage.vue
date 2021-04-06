@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="user-page">
     <router-view />
     <Header />
     <div class="user-page-body">
-      <div class="user-page-body-data">
+      <div class="user-page-body-data" v-if="userData">
         <UserData :nickname="userData.nickname" :userId="userData.userId" />
         <Friends :friends="friends" :userId="userData.userId" />
       </div>
+      <AddPublcation />
       <Publications :publications="publications" />
     </div>
   </div>
@@ -19,6 +20,7 @@ import Header from "@/components/Header";
 import UserData from "@/components/UserData";
 import Publications from "@/components/Publications";
 import Friends from "@/components/Friends";
+import AddPublcation from "@/components/AddPublication";
 
 export default {
   name: "UserPage",
@@ -53,13 +55,15 @@ export default {
     Header,
     UserData,
     Friends,
-    Publications
+    Publications,
+    AddPublcation
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .user-page {
+  padding: 6% 3% 0;
   &-body-data {
     justify-content: space-between;
     display: flex;

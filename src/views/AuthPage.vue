@@ -204,7 +204,7 @@ input {
   cursor: pointer;
   color: rgb(219, 99, 0);
 }
-.auth-click-here:hover {
+.aut h-click-here:hover {
   color: rgb(180, 83, 3);
 }
 
@@ -231,6 +231,7 @@ input {
   color: rgb(219, 99, 0);
   border-radius: 4px;
 }
+
 .auth-middle button:hover {
   background: rgb(219, 99, 0);
   border: 1px solid rgb(219, 99, 0);
