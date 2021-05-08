@@ -4,12 +4,13 @@
       <div class="friend-avatar"></div>
       <span class="friend-nickname">{{ nickname }}</span>
     </div>
-    <button class="delete-button">Delete</button>
+    <button class="delete-button" @click="deleteFriend">Delete</button>
   </li>
 </template>
 
 <script>
-// import {mapGetters,mapActions} from 'vuex'
+import { mapActions } from "vuex";
+import axios from "axios";
 
 export default {
   name: "Friend",
@@ -22,11 +23,26 @@ export default {
     }
   },
   methods: {
-    deleteFriend() {
-      console.log("delete");
+    ...mapActions(["deleteFriends", "setFriends"]),
+    async deleteFriend() {
+      await axios.put(
+        "https://pure-hollows-15090.herokuapp.com/api/".concat(
+          `page/friends/delete`
+        ),
+        { userId: this.friendId },
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("token")
+          }
+        }
+      );
+
+      await this.deleteFriends(this.friendId);
+      await this.setFriends(sessionStorage.getItem("userId"));
     },
-    moveTo() {
-      this.$router.push({ name: "UserPage", params: { id: this.friendId } });
+    moveTo(e) {
+      if (e.target.tagName === "LI")
+        this.$router.push({ name: "UserPage", params: { id: this.friendId } });
     }
   }
 };

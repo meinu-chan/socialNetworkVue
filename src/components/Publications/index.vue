@@ -1,16 +1,21 @@
 <template>
-  <div class="root-publication">
-    <div v-for="publication in publicationsData" :key="publication._id">
-      <publication
-        v-if="publication"
-        :_id="publication._id"
-        :userId="userId"
-        :nickname="getUser.nickname"
-        :date="publication.date"
-        :value="publication.value"
-        :comments="publication.comments"
-        :likedUsers="publication.likedUsers"
-      />
+  <div>
+    <div v-if="publicationsData.length" class="root-publication">
+      <div v-for="publication in publicationsData" :key="publication._id">
+        <publication
+          v-if="publication"
+          :_id="publication._id"
+          :userId="userId"
+          :nickname="getUser.nickname"
+          :date="publication.date"
+          :value="publication.value"
+          :comments="publication.comments"
+          :likedUsers="publication.likedUsers"
+        />
+      </div>
+    </div>
+    <div v-else class="no-publications">
+      <h2>No publications.</h2>
     </div>
   </div>
 </template>
@@ -57,8 +62,15 @@ export default {
 <style lang="scss" scoped>
 .root-publication {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-publications {
+  margin-top: 10%;
+  display: flex;
   justify-content: center;
   align-items: center;
 }

@@ -27,6 +27,6 @@ export default {
                 commit('updateFriends', res.data.friends);
             });
             commit('updateLoading', false);
-        }
+        },
     }
 }

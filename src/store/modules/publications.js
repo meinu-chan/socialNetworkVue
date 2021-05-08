@@ -31,7 +31,8 @@ export default {
         },
         async ratePublication({ commit }, publicId) {
             try {
-                const { data: { publication } } = await axios.put("https://pure-hollows-15090.herokuapp.com/api/".concat(`publication/rate`), { publicId },
+                const { data: { publication } } = await axios.put("https://pure-hollows-15090.herokuapp.com/api/".concat(`publication/rate`),
+                    { publicId },
                     {
                         headers: {
                             Authorization: sessionStorage.getItem("token")

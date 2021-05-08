@@ -1,50 +1,84 @@
 <template>
-  <div class="add-publication">
-    <textarea-autosize
-      placeholder="Tell world about your day..."
-      class="body-textarea"
-    />
-    <button class="body-btn">Publicate</button>
+  <div class="add-publication-root">
+    <div class="add-publication">
+      <textarea-autosize
+        v-model="publicationValue"
+        placeholder="Tell world about your day..."
+        class="body-textarea"
+      />
+      <button class="body-btn" @click="createPublication">
+        Publicate
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+import axios from "axios";
+
 export default {
-  name: "AddPublication"
+  name: "AddPublication",
+  data() {
+    return {
+      publicationValue: ""
+    };
+  },
+  methods: {
+    ...mapActions(["getAllPublications"]),
+    async createPublication() {
+      await axios.put(
+        "https://pure-hollows-15090.herokuapp.com/api/".concat(`publication`),
+        { value: this.publicationValue },
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("token")
+          }
+        }
+      );
+
+      this.publicationValue = "";
+
+      await this.getAllPublications(this.getUser._id);
+    }
+  },
+  computed: {
+    ...mapGetters(["getUser"])
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.add-publication-root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
 .add-publication {
-  width: 50%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  margin: 2% auto;
-  &.body {
-    width: 100%;
-  }
-
-  &.header {
-    width: fit-content;
-  }
 }
 
 .body {
   display: flex;
   &-textarea {
-    width: 100%;
+    width: 600px;
     border: 1px solid rgb(219, 99, 0);
     border-radius: 10px 10px 0 10px;
-    padding: 1.5%;
+    padding: 3px;
     font-family: Poppins;
     font-size: 20px;
   }
 
   &-btn {
     margin-top: 4px;
-    padding: 2.6%;
+    padding: 1%;
     color: #747474;
     font-size: 20px;
     background: #fff;
