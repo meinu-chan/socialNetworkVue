@@ -47,4 +47,13 @@ h2 {
   margin: 0;
   padding: 0;
 }
+
+span {
+  display: inline-block;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url("./assets/fonts/Poppins-Light.ttf");
+}
 </style>

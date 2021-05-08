@@ -1,14 +1,17 @@
 <template>
   <div class="user-page">
-    <router-view />
     <Header />
     <div class="user-page-body">
       <div class="user-page-body-data" v-if="userData">
         <UserData :nickname="userData.nickname" :userId="userData.userId" />
         <Friends :friends="friends" :userId="userData.userId" />
       </div>
-      <AddPublcation />
-      <Publications :publications="publications" />
+      <AddPublcation v-if="myPage" />
+      <Publications
+        v-if="userData"
+        :publications="publications"
+        :userId="userData.userId"
+      />
     </div>
   </div>
 </template>
@@ -48,6 +51,11 @@ export default {
             nickname: this.getUser.nickname
           }
         : null;
+    },
+    myPage() {
+      return this.getUser
+        ? sessionStorage.getItem("userId") === this.getUser._id
+        : false;
     }
   },
 

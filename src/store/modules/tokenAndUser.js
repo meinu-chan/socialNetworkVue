@@ -68,7 +68,6 @@ export default {
                 ).catch(error => commit("setError", error))
         },
         async searchUserByName({ commit }, { name, token }) {
-            console.log(name, token)
             await axios
                 .get(
                     "https://pure-hollows-15090.herokuapp.com/api/".concat(

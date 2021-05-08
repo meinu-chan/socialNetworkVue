@@ -44,11 +44,11 @@
       <div class="auth-bottom">
         <span v-if="!login">
           If you already have account
-          <span class="auth-click-here" @click="setLogin">click here.</span>
+          <span class="auth-click-here" :disabled="loading" @click="setLogin">click here.</span>
         </span>
         <span v-else>
           If you don't have account
-          <span class="auth-click-here" @click="setLogin">click here.</span>
+          <span class="auth-click-here" :disabled="loading" @click="setLogin">click here.</span>
         </span>
       </div>
     </div>
