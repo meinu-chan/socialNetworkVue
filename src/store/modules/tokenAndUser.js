@@ -79,7 +79,6 @@ export default {
                 }
 
                 ).then(res => {
-                    console.log(res);
                     commit("updateUser", res.data.user)
                 })
                 .catch(error => commit("setError", error))

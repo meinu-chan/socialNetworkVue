@@ -23,7 +23,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["deleteFriends", "setFriends"]),
+    ...mapActions(["deleteFriends", "setFriends", "searchUserByName"]),
     async deleteFriend() {
       await axios.put(
         "https://pure-hollows-15090.herokuapp.com/api/".concat(
@@ -42,7 +42,15 @@ export default {
     },
     moveTo(e) {
       if (e.target.tagName === "LI")
-        this.$router.push({ name: "UserPage", params: { id: this.friendId } });
+        this.searchUserByName({
+          name: this.nickname,
+          token: sessionStorage.getItem("token")
+        }).then(() =>
+          this.$router.push({
+            name: "UserPage",
+            params: { id: this.friendId }
+          })
+        );
     }
   }
 };

@@ -7,7 +7,12 @@
           <input type="text" placeholder="Search user..." v-model="nickname" />
           <button class="search-btn" @click="searchUser">Search</button>
         </div>
-        <font-awesome-icon icon="user-circle" class="user-icon" />
+        <font-awesome-icon
+          @click="backToMyPage"
+          icon="user-circle"
+          class="user-icon"
+          :class="{ inviseable: myPage, 'user-icon': !myPage }"
+        />
       </div>
     </div>
   </header>
@@ -35,10 +40,21 @@ export default {
           params: { id: this.getUser._id }
         })
       );
+    },
+    backToMyPage() {
+      this.$router.push({
+        name: "UserPage",
+        params: { id: sessionStorage.getItem("userId") }
+      });
     }
   },
   computed: {
-    ...mapGetters(["getToken", "getUser"])
+    ...mapGetters(["getToken", "getUser"]),
+    myPage() {
+      return this.getUser
+        ? sessionStorage.getItem("userId") === this.getUser._id
+        : false;
+    }
   }
 };
 </script>
@@ -50,6 +66,15 @@ export default {
   font-size: 30px;
 }
 
+.inviseable {
+  cursor: default;
+  color: rgba(255, 255, 255, 0) !important;
+}
+
+.user-icon:hover {
+  color: #415b75;
+  transition: 0.2s;
+}
 .header {
   background: #cfcfcf;
   width: 80%;

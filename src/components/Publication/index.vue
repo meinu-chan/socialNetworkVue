@@ -11,7 +11,7 @@
       {{ value }}
     </div>
     <div class="publication-footer">
-      <div class="comments-count">
+      <div class="comments-count" @click="moveToPublication">
         {{ comments.length }}
         <font-awesome-icon icon="comment" />
       </div>
@@ -29,7 +29,6 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Publication",
   props: {
-    allPublics: Array,
     _id: String,
     userId: {
       type: String
@@ -83,6 +82,13 @@ export default {
       this.liked = publication.likedUsers.includes(
         sessionStorage.getItem("userId")
       );
+    },
+    moveToPublication() {
+      this.$router.push({
+        name: "PublicationPage",
+        params: { publicationId: this._id },
+        props: { publicId: this._id }
+      });
     }
   },
   computed: {
@@ -116,7 +122,7 @@ $border-img: 1px solid rgb(117, 117, 117);
   min-width: 20px;
   min-height: 20px;
   border-radius: 50%;
-  background-image: url("../../../../assets/default-user-image.png");
+  background-image: url("../../assets/default-user-image.png");
   background-size: 100% 100%;
   border: $border-img;
 }

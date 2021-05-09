@@ -28,11 +28,12 @@ import AddPublcation from "@/components/AddPublication";
 export default {
   name: "UserPage",
   methods: {
-    ...mapActions(["setUserById", "setToken"])
+    ...mapActions(["setUserById", "setToken", "getAllPublications"])
   },
-  mounted() {
+  async mounted() {
     !this.getToken && this.setToken(sessionStorage.getItem("token"));
-    this.setUserById(window.location.href.split("/").pop());
+    await this.setUserById(window.location.href.split("/").pop());
+    this.getAllPublications(this.getUser._id);
   },
   computed: {
     ...mapGetters(["getUser", "getToken"]),

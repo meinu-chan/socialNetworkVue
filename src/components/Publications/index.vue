@@ -26,7 +26,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import Publication from "./components/Publication/index";
+import Publication from "../Publication";
 
 library.add(faComment);
 library.add(faHeart);
