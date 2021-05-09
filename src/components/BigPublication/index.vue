@@ -75,6 +75,7 @@ export default {
 $border-img: 1px solid rgb(117, 117, 117);
 
 .root {
+  padding-top: 70px;
   display: flex;
   justify-content: center;
 }

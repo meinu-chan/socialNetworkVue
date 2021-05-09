@@ -1,10 +1,12 @@
 <template>
   <div class="user-page">
-    <Header />
+    <slot></slot>
     <div class="user-page-body">
       <div class="user-page-body-data" v-if="userData">
         <UserData :nickname="userData.nickname" :userId="userData.userId" />
-        <Friends :friends="friends" :userId="userData.userId" />
+        <div class="user-page-func">
+          <Friends :friends="friends" :userId="userData.userId" />
+        </div>
       </div>
       <AddPublcation v-if="myPage" />
       <Publications
@@ -19,7 +21,6 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
-import Header from "@/components/Header";
 import UserData from "@/components/UserData";
 import Publications from "@/components/Publications";
 import Friends from "@/components/Friends";
@@ -27,6 +28,11 @@ import AddPublcation from "@/components/AddPublication";
 
 export default {
   name: "UserPage",
+  data() {
+    return {
+      status: "Send"
+    };
+  },
   methods: {
     ...mapActions(["setUserById", "setToken", "getAllPublications"])
   },
@@ -61,7 +67,6 @@ export default {
   },
 
   components: {
-    Header,
     UserData,
     Friends,
     Publications,
@@ -76,6 +81,28 @@ export default {
   &-body-data {
     justify-content: space-between;
     display: flex;
+  }
+}
+
+.user-page-func {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  button {
+    margin-bottom: 20px;
+    padding: 10%;
+    width: 100%;
+    color: #747474;
+    font-size: 18px;
+    background: #fff;
+    border: 1px solid rgb(219, 99, 0);
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      background: rgb(219, 99, 0);
+      color: #fff;
+      transition: 0.5s;
+    }
   }
 }
 </style>

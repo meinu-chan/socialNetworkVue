@@ -7,7 +7,7 @@
       </div>
       <span>{{ commentDate(comment.date) }}</span>
     </div>
-    <div class="comment-value">
+    <div v-if="comment" class="comment-value">
       {{ comment.value }}
     </div>
   </div>
@@ -89,7 +89,7 @@ $border-img: 1px solid rgb(117, 117, 117);
 .comment {
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 580px;
   border: 1px solid rgb(219, 99, 0);
   margin: 10px 0;
 }

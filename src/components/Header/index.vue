@@ -51,9 +51,12 @@ export default {
   computed: {
     ...mapGetters(["getToken", "getUser"]),
     myPage() {
-      return this.getUser
-        ? sessionStorage.getItem("userId") === this.getUser._id
-        : false;
+      if (this.getUser)
+        return (
+          sessionStorage.getItem("userId") === this.getUser._id &&
+          this.$router.currentRoute.name === "UserPage"
+        );
+      return false;
     }
   }
 };
@@ -67,8 +70,7 @@ export default {
 }
 
 .inviseable {
-  cursor: default;
-  color: rgba(255, 255, 255, 0) !important;
+  display: none;
 }
 
 .user-icon:hover {

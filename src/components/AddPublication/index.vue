@@ -55,6 +55,7 @@ export default {
   justify-content: center;
   align-items: center;
   align-content: center;
+  margin-top: 5%;
 }
 
 .add-publication {

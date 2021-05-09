@@ -1,5 +1,6 @@
 <template>
   <div class="root">
+    <slot></slot>
     <big-publication
       v-if="publication"
       :_id="publicId"

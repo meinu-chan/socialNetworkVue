@@ -1,12 +1,19 @@
 <template>
   <div id="app" class="container">
-    <router-view :key="$route.path" />
+    <router-view :key="$route.path">
+      <Header />
+    </router-view>
   </div>
 </template>
 
 <script>
+import Header from "@/components/Header";
+
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    Header
+  }
 };
 </script>
 
